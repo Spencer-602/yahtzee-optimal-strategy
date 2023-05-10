@@ -7,13 +7,13 @@ class Category:
         'FH','SS','LS',
         'C', 'Y']
     CATEGORY_NAME_TO_ID = {}
-    for i,name in enumerate(CATEGORY_ID_TO_NAME):
+    for i,name in enumerate(CATEGORY_ID_TO_NAME): # iterates through CATEGORY_ID_TO_NAME
         CATEGORY_NAME_TO_ID[name] = i
         
     N_FACES = 6
     N_DICES = 5
     N_CATEGORIES = 13
-    S_max = 1<<N_CATEGORIES
+    S_max = 1<<N_CATEGORIES # S_max = 8192
     
     @staticmethod
     def is_upper_category(category):
