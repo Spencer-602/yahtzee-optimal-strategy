@@ -6,9 +6,9 @@ class Category:
         '5', '6', '3K','4K',
         'FH','SS','LS',
         'C', 'Y']
-    CATEGORY_NAME_TO_ID = {}
-    for i,name in enumerate(CATEGORY_ID_TO_NAME): # iterates through CATEGORY_ID_TO_NAME
-        CATEGORY_NAME_TO_ID[name] = i
+     CATEGORY_NAME_TO_ID = {}
+     for i,name in enumerate(CATEGORY_ID_TO_NAME): # fills CATEGORY_NAME_TO_ID with CATEGORY_ID_TO_NAME 
+         CATEGORY_NAME_TO_ID[name] = i
         
     N_FACES = 6
     N_DICES = 5
@@ -20,14 +20,14 @@ class Category:
         return category in ['1','2','3','4','5','6']
 
     @staticmethod
-    def get_all_possible_point(category):
+    def get_all_possible_point(category): # all possible points scoring in each category
         possible_points = set()
         if Category.is_upper_category(category):
-            for dice in range(0, Category.N_DICES+1):
-                possible_points.add(dice* (Category.CATEGORY_NAME_TO_ID[category]+1))
+            for dice in range(0, Category.N_DICES + 1): # 0-5 dice scored
+                possible_points.add(dice * (Category.CATEGORY_NAME_TO_ID[category] + 1)) # adds 0-5 dice * value of category
         
-        if category in ['3K','4K','C']:
-            for total in range(Category.N_DICES,Category.N_DICES*Category.N_FACES+1):
+        if category in ['3K','4K','C']: 
+            for total in range(Category.N_DICES, Category.N_DICES * Category.N_FACES + 1): # lowest possible: all ones = 5. highest possible: all sixes = 30
                 possible_points.add(total)
         if category == 'FH':
             possible_points.add(25)
