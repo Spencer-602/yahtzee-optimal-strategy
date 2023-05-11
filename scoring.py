@@ -15,7 +15,7 @@ class Category:
     N_CATEGORIES = 13
     S_max = 1<<N_CATEGORIES # S_max = 8192
     
-    @staticmethod
+    @staticmethod # static method is part of the class, not an instance of it.
     def is_upper_category(category):
         return category in ['1','2','3','4','5','6']
 
