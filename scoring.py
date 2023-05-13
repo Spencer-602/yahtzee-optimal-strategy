@@ -42,10 +42,10 @@ class Category:
         return possible_points
     
 def set_bit(state, x):
-    return state | (1<<(x))
+    return state | (1<<(x)) # sets the bit at x to 1
 
 def clear_bit(s, x):
-    return s & ~(1<<(x-1))
+    return s & ~(1<<(x-1)) # sets the bit at x - 1 to 0
     
 def get_category_name_out_of_mask(mask):
     ret = set()
