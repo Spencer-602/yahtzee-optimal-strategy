@@ -110,10 +110,10 @@ class Roll:
         
     def rebuild_hist(self):
         sorted(self._roll) # sorts the roll alphabetically
-        self._hist = {}
+        self._hist = {} # dictionary
         for dice in self._roll:
-            self._hist.setdefault(dice, 0)
-            self._hist[dice] += 1
+            self._hist.setdefault(dice, 0) # adds dice with the value 0 to the dictionary if that dice hasn't been rolled yet
+            self._hist[dice] += 1 # adds 1 to the value of the dice. the value shows the amount of each dice rolled
             
     def get_point_sum(self):
         return sum([v for v in self._roll])
