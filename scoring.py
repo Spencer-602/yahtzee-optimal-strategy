@@ -49,7 +49,7 @@ def clear_bit(s, x):
     
 def get_category_name_out_of_mask(mask):
     ret = set()
-    for i in range(Category.N_CATEGORIES):
+    for i in range(Category.N_CATEGORIES): # runs through every bit in mask-
         if (mask & (1<<i)) == 0: # if the "i"th bit of mask is unset (equal to 0)
             ret.add(Category.CATEGORY_ID_TO_NAME[i]) # then add it to ret
     return ret  
@@ -57,7 +57,7 @@ def get_category_name_out_of_mask(mask):
 class Roll: 
     def __init__(self, roll):
         self._roll = list(roll)
-        assert(len(roll) == Category.N_DICES)
+        assert(len(roll) == Category.N_DICES) # assert keyword raises an error if wrong number of dice were rolled
         self.rebuild_hist()
 
     def any_xle(self, n):
