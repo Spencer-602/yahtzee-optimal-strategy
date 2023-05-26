@@ -50,8 +50,8 @@ def clear_bit(s, x):
 def get_category_name_out_of_mask(mask):
     ret = set()
     for i in range(Category.N_CATEGORIES):
-        if (mask & (1<<i)) == 0:
-            ret.add(Category.CATEGORY_ID_TO_NAME[i])
+        if (mask & (1<<i)) == 0: # if the "i"th bit of mask is unset (equal to 0)
+            ret.add(Category.CATEGORY_ID_TO_NAME[i]) # then add it to ret
     return ret  
 
 class Roll: 
