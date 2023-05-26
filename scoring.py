@@ -109,7 +109,7 @@ class Roll:
         return self._hist[x] * x
         
     def rebuild_hist(self):
-        sorted(self._roll)
+        sorted(self._roll) # sorts the roll alphabetically
         self._hist = {}
         for dice in self._roll:
             self._hist.setdefault(dice, 0)
