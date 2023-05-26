@@ -20,7 +20,7 @@ class Category:
         return category in ['1','2','3','4','5','6']
 
     @staticmethod
-    def get_all_possible_point(category): # all possible points scoring in each category
+    def get_all_possible_point(category): # returns all possible points you could score in category
         possible_points = set()
         if Category.is_upper_category(category):
             for dice in range(0, Category.N_DICES + 1): # 0-5 dice scored
@@ -150,14 +150,15 @@ def eval_point_for_all():
     dice = range(1,7) # creates sequence of number 1 - 6
     for t in combinations_with_replacement(dice,5): # all the possible rolls of 5 dice
         r = Roll(t)
-        #print t, r.eval_point('3K')  
-                
+        #print t, r.eval_point('3K') -- for testing
+        
+## for testing ##                
 if __name__ == '__main__': # if this module is the main module
-    for c in ['1','2','3','4','5','6']:
+    for c in ['1','2','3','4','5','6']: # prints all possible points for each upper category
         print c
         print Category.get_all_possible_point(c)
         
-    for c in ['3K','4K','Y','FH','SS','LS','Y','C']:
+    for c in ['3K','4K','Y','FH','SS','LS','Y','C']: # prints all possible points for each lower category
         print c
         print Category.get_all_possible_point(c)
         
