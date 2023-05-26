@@ -58,11 +58,11 @@ class Roll:
     def __init__(self, roll):
         self._roll = list(roll)
         assert(len(roll) == Category.N_DICES) # assert keyword raises an error if wrong number of dice were rolled
-        self.rebuild_hist()
+        self.rebuild_hist() # sorts the roll in a dictionary with each dice and how many of it is rolled
 
     def any_xle(self, n):
-        for v in self._hist.values():
-            if v == n:
+        for v in self._hist.values(): # amounts of each dice
+            if v == n: # if there is exactly n amount of a certain dice
                 return True
         return False
     
@@ -87,7 +87,7 @@ class Roll:
         return x in self._hist
     
     def has_3_of_a_kind(self):
-        return self.has_yahtzee() or self.any_quadruple() or self.any_triple()
+        return self.has_yahtzee() or self.any_quadruple() or self.any_triple() # at least 3
     
     def has_4_of_a_kind(self):
         return self.has_yahtzee() or self.any_quadruple()
@@ -101,12 +101,12 @@ class Roll:
                (3 in self._hist and 4 in self._hist and 5 in self._hist and 6 in self._hist)
     
     def has_large_straight(self):
-        return len(self._hist) == 5 and (1 not in self._hist or 6 not in self._hist)
+        return len(self._hist) == 5 and (1 not in self._hist or 6 not in self._hist) # length of roll dictionary is 5 (no duplicates) and doesn't have 1 or 6
     
-    def get_point_xs(self, x):
+    def get_point_xs(self, x): # used for upper categories
         if x not in self._hist:
             return 0
-        return self._hist[x] * x
+        return self._hist[x] * x # dice * number of that dice
         
     def rebuild_hist(self):
         sorted(self._roll) # sorts the roll alphabetically
@@ -115,10 +115,10 @@ class Roll:
             self._hist.setdefault(dice, 0) # adds dice with the value 0 to the dictionary if that dice hasn't been rolled yet
             self._hist[dice] += 1 # adds 1 to the value of the dice. the value shows the amount of each dice rolled
             
-    def get_point_sum(self):
-        return sum([v for v in self._roll])
+    def get_point_sum(self): # used for chance
+        return sum([v for v in self._roll]) # adds the values of all the dice
             
-    def eval_point(self, category):
+    def eval_point(self, category): # calculates score depending on category chosen
         if Category.is_upper_category(category):
             return self.get_point_xs(int(category))
         if category == '3K':
@@ -147,12 +147,12 @@ class Roll:
     
 from itertools import combinations_with_replacement
 def eval_point_for_all():
-    dice = range(1,7)
-    for t in combinations_with_replacement(dice,5):
+    dice = range(1,7) # creates sequence of number 1 - 6
+    for t in combinations_with_replacement(dice,5): # all the possible rolls of 5 dice
         r = Roll(t)
         #print t, r.eval_point('3K')  
                 
-if __name__ == '__main__':
+if __name__ == '__main__': # if this module is the main module
     for c in ['1','2','3','4','5','6']:
         print c
         print Category.get_all_possible_point(c)
