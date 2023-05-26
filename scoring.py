@@ -6,9 +6,9 @@ class Category:
         '5', '6', '3K','4K',
         'FH','SS','LS',
         'C', 'Y']
-     CATEGORY_NAME_TO_ID = {}
-     for i,name in enumerate(CATEGORY_ID_TO_NAME): # fills CATEGORY_NAME_TO_ID with CATEGORY_ID_TO_NAME 
-         CATEGORY_NAME_TO_ID[name] = i
+    CATEGORY_NAME_TO_ID = {}
+    for i,name in enumerate(CATEGORY_ID_TO_NAME): # fills CATEGORY_NAME_TO_ID with CATEGORY_ID_TO_NAME 
+        CATEGORY_NAME_TO_ID[name] = i
         
     N_FACES = 6
     N_DICES = 5
@@ -142,7 +142,7 @@ class Roll:
         if category == 'C':
             return self.get_point_sum()
         
-        print 'no such category'
+        print('no such category')
         return 0
     
 from itertools import combinations_with_replacement
@@ -150,16 +150,16 @@ def eval_point_for_all():
     dice = range(1,7) # creates sequence of number 1 - 6
     for t in combinations_with_replacement(dice,5): # all the possible rolls of 5 dice
         r = Roll(t)
-        #print t, r.eval_point('3K') -- for testing
+        print(t, r.eval_point('3K')) #-- for testing
         
 ## for testing ##                
 if __name__ == '__main__': # if this module is the main module
     for c in ['1','2','3','4','5','6']: # prints all possible points for each upper category
-        print c
-        print Category.get_all_possible_point(c)
+        print(c)
+        print(Category.get_all_possible_point(c))
         
-    for c in ['3K','4K','Y','FH','SS','LS','Y','C']: # prints all possible points for each lower category
-        print c
-        print Category.get_all_possible_point(c)
+    for c in ['3K','4K','FH','SS','LS','Y','C']: # prints all possible points for each lower category
+        print(c)
+        print(Category.get_all_possible_point(c))
         
     eval_point_for_all()
