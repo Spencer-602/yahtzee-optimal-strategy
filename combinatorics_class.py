@@ -12,12 +12,12 @@ def reverse_dict(d):
 """ dice throw experiment"""
 def throw_dice(kept):
     n_dice_to_roll = 5-len(kept)
-    outcomes  = set(product(dice, repeat=n_dice_to_roll))   
+    outcomes  = set(product(dice, repeat=n_dice_to_roll)) # set with all possible outcomes of rolling n dice
     hist = {}
     for trial in outcomes:
-        sorted_trial = tuple(sorted(chain(kept, trial)))
-        hist.setdefault(sorted_trial, 0)
-        hist[sorted_trial] += 1
+        sorted_trial = tuple(sorted(chain(kept, trial))) # combines kept dice with currently rolled dice
+        hist.setdefault(sorted_trial, 0) # adds the dice to the dictionary with value 0
+        hist[sorted_trial] += 1 # adds 1 for every occurence 
     normalizer = float(sum(hist.values()))
     for k in hist:
         hist[k] /= normalizer
