@@ -1,7 +1,7 @@
 from itertools import combinations_with_replacement, combinations, product, chain
 from scoring import Roll, Category
 
-def reverse_dict(d):
+def reverse_dict(d): # switches the keys and values    
     rd = {}
     for k in d:
         for roll in d[k]:
@@ -10,18 +10,19 @@ def reverse_dict(d):
     return rd
 
 """ dice throw experiment"""
-def throw_dice(kept): # 
+def throw_dice(kept): # calculates probability of each dice roll
     n_dice_to_roll = 5-len(kept)
     # dice = (1,2,3,4,5,6)
     outcomes  = set(product(dice, repeat=n_dice_to_roll)) # set with all possible outcomes of rolling n dice
     hist = {}
     for trial in outcomes:
+        # chain combines two iterables together
         sorted_trial = tuple(sorted(chain(kept, trial))) # combines kept dice with currently rolled "trial" dice - sorted numerically
         hist.setdefault(sorted_trial, 0) # adds the dice to the dictionary with value 0 if it is not already there
         hist[sorted_trial] += 1 # adds 1 occurence to the dice combination.
-    normalizer = float(sum(hist.values())) # number of possibilities without repeats
+    normalizer = float(sum(hist.values())) # number of possibilities
     for k in hist:
-        hist[k] /= normalizer
+        hist[k] /= normalizer # for each dice roll - divides number of occurences by total number of dice rolls
     return hist
     
 """ g3: the edges from g2 to g3"""        
