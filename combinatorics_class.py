@@ -10,15 +10,15 @@ def reverse_dict(d):
     return rd
 
 """ dice throw experiment"""
-def throw_dice(kept):
+def throw_dice(kept): # 
     n_dice_to_roll = 5-len(kept)
     outcomes  = set(product(dice, repeat=n_dice_to_roll)) # set with all possible outcomes of rolling n dice
     hist = {}
     for trial in outcomes:
-        sorted_trial = tuple(sorted(chain(kept, trial))) # combines kept dice with currently rolled dice
-        hist.setdefault(sorted_trial, 0) # adds the dice to the dictionary with value 0
-        hist[sorted_trial] += 1 # adds 1 for every occurence 
-    normalizer = float(sum(hist.values()))
+        sorted_trial = tuple(sorted(chain(kept, trial))) # combines kept dice with currently rolled "trial" dice - sorted numerically
+        hist.setdefault(sorted_trial, 0) # adds the dice to the dictionary with value 0 if it is not already there
+        hist[sorted_trial] += 1 # adds 1 occurence to the dice combination.
+    normalizer = float(sum(hist.values())) # number of possibilities without repeats
     for k in hist:
         hist[k] /= normalizer
     return hist
@@ -33,7 +33,7 @@ def get_edges_and_prob():
                     distinct_keeper.add(keep)
                     kept_to_id[keep] = len(distinct_keeper)-1
                     id_to_kept[len(distinct_keeper)-1] = keep
-                
+
     reroller = {}
     for case in distinct_keeper:
         n_dice_to_reroll = 5 - len(case)
