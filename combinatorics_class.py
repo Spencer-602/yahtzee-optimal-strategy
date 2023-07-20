@@ -12,6 +12,7 @@ def reverse_dict(d):
 """ dice throw experiment"""
 def throw_dice(kept): # 
     n_dice_to_roll = 5-len(kept)
+    # dice = (1,2,3,4,5,6)
     outcomes  = set(product(dice, repeat=n_dice_to_roll)) # set with all possible outcomes of rolling n dice
     hist = {}
     for trial in outcomes:
