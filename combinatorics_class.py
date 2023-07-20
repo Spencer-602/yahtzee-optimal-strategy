@@ -1,7 +1,7 @@
 from itertools import combinations_with_replacement, combinations, product, chain
 from scoring import Roll, Category
 
-def reverse_dict(d): # switches the keys and values    
+def reverse_dict(d): 
     rd = {}
     for k in d:
         for roll in d[k]:
