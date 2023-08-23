@@ -28,8 +28,8 @@ def throw_dice(kept): # calculates probability of each dice roll
 """ g3: the edges from g2 to g3"""        
 def get_edges_and_prob():
     dice = range(1,7)
-    # combinations with replacement: allows same item to be used multiple times in the same group
-    # combinations: each item can only be used once per group
+    # combinations with replacement: unordered, allows same item to be used multiple times in the same group Ex. (1,2,3,4) -> (1,1,2), (1,3,3), (1,4,3)
+    # combinations: unordered, each item can only be used once per group Ex. (1,2,3) -> (1,2,3), (1,2,4)
     for t in combinations_with_replacement(dice,5): # every possible roll with 5 dice without repitition - length 252 - page 8
         for n_keep in range(0,6): # every possible number of keep
             for keep in combinations(t,n_keep): # every n_keep size group in the current roll
