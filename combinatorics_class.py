@@ -13,16 +13,16 @@ def reverse_dict(d):
 def throw_dice(kept): # calculates probability of each dice roll
     n_dice_to_roll = 5-len(kept)
     # dice = (1,2,3,4,5,6)
-    outcomes  = set(product(dice, repeat=n_dice_to_roll)) # set with all possible outcomes of rolling n dice - with repitition
+    outcomes  = set(product(dice, repeat=n_dice_to_roll)) # set with all possible outcomes of rolling n dice - with repetition
     hist = {}
     for trial in outcomes:
         # chain combines two iterables together
         sorted_trial = tuple(sorted(chain(kept, trial))) # combines kept dice with currently rolled "trial" dice - sorted numerically
         hist.setdefault(sorted_trial, 0) # adds the dice to the dictionary with value 0 if it is not already there
-        hist[sorted_trial] += 1 # adds 1 occurence to the dice combination.
+        hist[sorted_trial] += 1 # adds 1 occurrence to the dice combination.
     normalizer = float(sum(hist.values())) # number of possibilities
     for k in hist:
-        hist[k] /= normalizer # for each dice roll - divides number of occurences by total number of dice rolls
+        hist[k] /= normalizer # for each dice roll - divides number of occurrences by total number of dice rolls
     return hist
     
 """ g3: the edges from g2 to g3"""        
@@ -30,7 +30,7 @@ def get_edges_and_prob():
     dice = range(1,7)
     # combinations with replacement: unordered, allows same item to be used multiple times in the same group Ex. (1,2,3,4) -> (1,1,2), (1,3,3), (1,4,3)
     # combinations: unordered, each item can only be used once per group Ex. (1,2,3) -> (1,2,3), (1,2,4)
-    for t in combinations_with_replacement(dice,5): # every possible roll with 5 dice without repitition - length 252 - page 8
+    for t in combinations_with_replacement(dice,5): # every possible roll with 5 dice without repetition - length 252 - page 8
         for n_keep in range(0,6): # every possible number of keep
             for keep in combinations(t,n_keep): # every n_keep size group in the current roll
                 if keep not in distinct_keeper:
