@@ -24,28 +24,30 @@ def throw_dice(kept): # calculates probability of each dice roll
     for k in hist:
         hist[k] /= normalizer # for each dice roll - divides number of occurrences by total number of dice rolls
     return hist
-    
-""" g3: the edges from g2 to g3"""        
+
+""" g3: the edges from g2 to g3"""
 def get_edges_and_prob():
     dice = range(1,7)
-    # combinations with replacement: unordered, allows same item to be used multiple times in the same group Ex. (1,2,3,4) -> (1,1,2), (1,3,3), (1,4,3)
-    # combinations: unordered, each item can only be used once per group Ex. (1,2,3) -> (1,2,3), (1,2,4)
+    # combinations with replacement(iterator, length of subset): unordered, allows same item to be used multiple times in the same group Ex. ((1,2,3,4), 3) -> (1,1,2), (1,3,3), (1,4,3)
+    # combinations(iterator, length of subset): unordered, each item can only be used once per group Ex. ((1,2,3,4), 3) -> (1,2,3), (1,2,4)
+
+    # fills distinct_keeper with every possible keep of every roll
     for t in combinations_with_replacement(dice,5): # every possible roll with 5 dice without repetition - length 252 - page 8
         for n_keep in range(0,6): # every possible number of keep
             for keep in combinations(t,n_keep): # every n_keep size group in the current roll
                 if keep not in distinct_keeper:
-                    distinct_keeper.add(keep)
-                    kept_to_id[keep] = len(distinct_keeper)-1
-                    id_to_kept[len(distinct_keeper)-1] = keep
+                    distinct_keeper.add(keep) 
+                    kept_to_id[keep] = len(distinct_keeper)-1 # converts keep to a number for easier use
+                    id_to_kept[len(distinct_keeper)-1] = keep # converts number back to keep
 
-    reroller = {}
+    reroller = {} # Dictionary
     for case in distinct_keeper:
-        n_dice_to_reroll = 5 - len(case)
-        for reroll in combinations_with_replacement(dice, n_dice_to_reroll):
-            reroll_result = tuple(sorted(chain(case, reroll)))
-            reroller.setdefault(case, {})
-            reroller[case].setdefault(reroll_result,0)
-            reroller[case][reroll_result] = 1
+        n_dice_to_reroll = 5 - len(case) # if you kept 0, reroll 5
+        for reroll in combinations_with_replacement(dice, n_dice_to_reroll): # possible rerolls 
+            reroll_result = tuple(sorted(chain(case, reroll))) # combines keep and reroll and sorts numerically to prevent duplicates
+            reroller.setdefault(case, {}) # if the current keep (case) doesn't exist yet, add it to reroller with a value of an empty dictionary - used to hold all possible reroll results
+            reroller[case].setdefault(reroll_result,0) # if the reroll result is new, add it to the keep's possible results with value 0
+            reroller[case][reroll_result] = 1 # if the reroll 
                 
     for case in reroller:
         hist = throw_dice(case)
