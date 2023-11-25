@@ -47,7 +47,7 @@ def get_edges_and_prob():
             reroll_result = tuple(sorted(chain(case, reroll))) # combines keep and reroll and sorts numerically to prevent duplicates
             reroller.setdefault(case, {}) # if the current keep (case) doesn't exist yet, add it to reroller with a value of an empty dictionary - used to hold all possible reroll results
             reroller[case].setdefault(reroll_result,0) # if the reroll result is new, add it to the keep's possible results with value 0
-            reroller[case][reroll_result] = 1 # if the reroll 
+            reroller[case][reroll_result] = 1 # why isn't this += 1 like line 22?
                 
     for case in reroller:
         hist = throw_dice(case)
